@@ -15,7 +15,7 @@ styles = {
     }
 }
 
-sheet = pd.read_csv('~/Desktop/BrooklynNets/SideProjects/FIN Best Lineup D-RAPTOR vs SY Q-RAD.csv', index_col=0)
+sheet = pd.read_csv('FIN Best Lineup D-RAPTOR vs SY Q-RAD.csv', index_col=0)
 
 bubble_size = sheet['AVG SY Q-RAD'] - sheet['AVG D-RAPTOR']
 sheet['Bubble Size'] = bubble_size
