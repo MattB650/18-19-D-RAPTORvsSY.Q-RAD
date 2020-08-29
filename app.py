@@ -21,8 +21,7 @@ sheet = pd.read_csv('FIN Best Lineup D-RAPTOR vs SY Q-RAD.csv', index_col=0)
 abs_bubble_size = abs(sheet['AVG D-RAPTOR'])
 sheet['ABS D-RAPTOR'] = abs_bubble_size
 
-fig = px.scatter(sheet, x='AVG SY Q-RAD', y='AVG D-RAPTOR', color='ABS D-RAPTOR', title= '2018-19 5 Man SY Q-RAD vs D-RAPTOR',
-                 hover_data=['Team', 'Lineup'])
+fig = px.scatter(sheet, x='AVG SY Q-RAD', y='AVG D-RAPTOR', color='ABS D-RAPTOR', title= '2018-19 5 Man SY Q-RAD vs D-RAPTOR', hover_name= 'Team', hover_data= 'Lineup)
 #fig.update_traces(hovertemplate='AVG SY Q-RAD: %{x} <br>AVG D-RAPTOR: %{y}')
 fig.update_traces(mode='markers', marker_size=27)
 
@@ -34,58 +33,10 @@ fig.update_layout(
     )
 )
 
-#fig.show()
-
-##app.layout = html.Div(children=[
-##    html.H1(children='2018-19 5-Man D-RAPTOR vs SY Q-RAD'),
-##
-##    html.Div(children='''
-##        The Best 5-Man Lineup from Each 2018-19 NBA Team, and its Aggreagate D-RAPTOR and SY Q-RAD.
-##    '''),
-##
-##    dcc.Graph(
-##        id='example-graph',
-##        figure=fig
-##    )
-##])
-##
-##if __name__ == '__main__':
-##    app.run_server(debug=True)
-
-#app.layout = html.Div(
-
-        #dcc.Graph(figure=fig, id='live-graph')
-#)
 
 
 
 
-##@app.callback(
-##    Output('hover-data', 'children'),
-##    [Input('basic-interactions', 'hoverData')])
-##def display_hover_data(hoverData):
-##    return json.dumps(hoverData)
-##
-##
-##@app.callback(
-##    Output('click-data', 'children'),
-##    [Input('basic-interactions', 'clickData')])
-##def display_click_data(clickData):
-##    return json.dumps(clickData)
-##
-##
-##@app.callback(
-##    Output('selected-data', 'children'),
-##    [Input('basic-interactions', 'selectedData')])
-##def display_selected_data(selectedData):
-##    return json.dumps(selectedData)
-##
-##
-##@app.callback(
-##    Output('relayout-data', 'children'),
-##    [Input('basic-interactions', 'relayoutData')])
-##def display_relayout_data(relayoutData):
-##    return json.dumps(relayoutData)
 
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
