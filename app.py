@@ -22,7 +22,7 @@ sheet['Bubble Size'] = bubble_size
 abs_bubble_size = abs(sheet['AVG D-RAPTOR']) * 10
 sheet['ABS D-RAPTOR'] = abs_bubble_size
 
-fig = px.scatter(sheet, x='AVG SY Q-RAD', y='AVG D-RAPTOR', color='Bubble Size', title= '2018-19 5 Man SY Q-RAD vs D-RAPTOR',
+fig = px.scatter(sheet, x='AVG SY Q-RAD', y='AVG D-RAPTOR', color='ABS D-RAPTOR', title= '2018-19 5 Man SY Q-RAD vs D-RAPTOR',
                  hover_data={'Bubble Size': False,  # remove species from hover data
                              'Team': True,  # customize hover for column of y attribute
                              'Lineup':True
