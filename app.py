@@ -17,8 +17,7 @@ styles = {
 
 sheet = pd.read_csv('FIN Best Lineup D-RAPTOR vs SY Q-RAD.csv', index_col=0)
 
-bubble_size = sheet['AVG SY Q-RAD'] - sheet['AVG D-RAPTOR']
-sheet['Bubble Size'] = bubble_size
+
 abs_bubble_size = abs(sheet['AVG D-RAPTOR']) * 10
 sheet['ABS D-RAPTOR'] = abs_bubble_size
 
