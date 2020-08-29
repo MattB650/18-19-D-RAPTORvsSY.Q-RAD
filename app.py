@@ -25,7 +25,7 @@ fig = px.scatter(sheet, x='AVG SY Q-RAD', y='AVG D-RAPTOR', color='ABS D-RAPTOR'
                  hover_data={
                              'Team': True,  # customize hover for column of y attribute
                              'Lineup':True,
-                             'ABS D-RAPTOR': False
+                             
 
                              })
 #fig.update_traces(hovertemplate='AVG SY Q-RAD: %{x} <br>AVG D-RAPTOR: %{y}')
