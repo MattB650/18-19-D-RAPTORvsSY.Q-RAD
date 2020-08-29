@@ -18,14 +18,14 @@ styles = {
 sheet = pd.read_csv('FIN Best Lineup D-RAPTOR vs SY Q-RAD.csv', index_col=0)
 
 
-abs_bubble_size = abs(sheet['AVG D-RAPTOR']) * 10
+abs_bubble_size = abs(sheet['AVG D-RAPTOR'])
 sheet['ABS D-RAPTOR'] = abs_bubble_size
 
 fig = px.scatter(sheet, x='AVG SY Q-RAD', y='AVG D-RAPTOR', color='ABS D-RAPTOR', title= '2018-19 5 Man SY Q-RAD vs D-RAPTOR',
                  hover_data={
                              'Team': True,  # customize hover for column of y attribute
                              'Lineup':True,
-                             'ABS D-RAPTOR':False
+                             'ABS D-RAPTOR': False
 
                              })
 #fig.update_traces(hovertemplate='AVG SY Q-RAD: %{x} <br>AVG D-RAPTOR: %{y}')
