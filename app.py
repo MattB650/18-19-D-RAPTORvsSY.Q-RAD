@@ -25,7 +25,8 @@ sheet['ABS D-RAPTOR'] = abs_bubble_size
 fig = px.scatter(sheet, x='AVG SY Q-RAD', y='AVG D-RAPTOR', color='ABS D-RAPTOR', title= '2018-19 5 Man SY Q-RAD vs D-RAPTOR',
                  hover_data={'Bubble Size': False,  # remove species from hover data
                              'Team': True,  # customize hover for column of y attribute
-                             'Lineup':True
+                             'Lineup':True,
+                             'ABS D-RAPTOR':False
 
                              })
 #fig.update_traces(hovertemplate='AVG SY Q-RAD: %{x} <br>AVG D-RAPTOR: %{y}')
