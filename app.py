@@ -1,63 +1,133 @@
+import os
+import pandas as pd
+import plotly.express as px
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
-import plotly.graph_objs as go
+from dash.dependencies import Output, Input
 
-########### Define your variables
-beers=['Chesapeake Stout', 'Snake Dog IPA', 'Imperial Porter', 'Double Dog IPA']
-ibu_values=[35, 60, 85, 75]
-abv_values=[5.4, 7.1, 9.2, 4.3]
-color1='lightblue'
-color2='darkgreen'
-mytitle='Beer Comparison'
-tabtitle='beer!'
-myheading='Flying Dog Beers'
-label1='IBU'
-label2='ABV'
-githublink='https://github.com/austinlasseter/flying-dog-beers'
-sourceurl='https://www.flyingdog.com/beers/'
 
-########### Set up the chart
-bitterness = go.Bar(
-    x=beers,
-    y=ibu_values,
-    name=label1,
-    marker={'color':color1}
+
+styles = {
+    'pre': {
+        'border': 'thin lightgrey solid',
+        'overflowX': 'scroll'
+    }
+}
+
+sheet = pd.read_csv('~/Desktop/BrooklynNets/SideProjects/FIN Best Lineup D-RAPTOR vs SY Q-RAD.csv', index_col=0)
+
+bubble_size = sheet['AVG SY Q-RAD'] - sheet['AVG D-RAPTOR']
+sheet['Bubble Size'] = bubble_size
+abs_bubble_size = abs(sheet['AVG D-RAPTOR']) * 10
+sheet['ABS D-RAPTOR'] = abs_bubble_size
+
+fig = px.scatter(sheet, x='AVG SY Q-RAD', y='AVG D-RAPTOR', color='Bubble Size', title= '2018-19 5 Man SY Q-RAD vs D-RAPTOR',
+                 hover_data={'Bubble Size': False,  # remove species from hover data
+                             'Team': True,  # customize hover for column of y attribute
+                             'Lineup':True
+
+                             })
+#fig.update_traces(hovertemplate='AVG SY Q-RAD: %{x} <br>AVG D-RAPTOR: %{y}')
+fig.update_traces(mode='markers', marker_size=27)
+
+fig.update_layout(
+    hoverlabel=dict(
+        bgcolor="white",
+        font_size=16,
+        font_family="Rockwell"
+    )
 )
-alcohol = go.Bar(
-    x=beers,
-    y=abv_values,
-    name=label2,
-    marker={'color':color2}
-)
 
-beer_data = [bitterness, alcohol]
-beer_layout = go.Layout(
-    barmode='group',
-    title = mytitle
-)
+#fig.show()
 
-beer_fig = go.Figure(data=beer_data, layout=beer_layout)
+##app.layout = html.Div(children=[
+##    html.H1(children='2018-19 5-Man D-RAPTOR vs SY Q-RAD'),
+##
+##    html.Div(children='''
+##        The Best 5-Man Lineup from Each 2018-19 NBA Team, and its Aggreagate D-RAPTOR and SY Q-RAD.
+##    '''),
+##
+##    dcc.Graph(
+##        id='example-graph',
+##        figure=fig
+##    )
+##])
+##
+##if __name__ == '__main__':
+##    app.run_server(debug=True)
+
+#app.layout = html.Div(
+
+        #dcc.Graph(figure=fig, id='live-graph')
+#)
 
 
-########### Initiate the app
+
+
+##@app.callback(
+##    Output('hover-data', 'children'),
+##    [Input('basic-interactions', 'hoverData')])
+##def display_hover_data(hoverData):
+##    return json.dumps(hoverData)
+##
+##
+##@app.callback(
+##    Output('click-data', 'children'),
+##    [Input('basic-interactions', 'clickData')])
+##def display_click_data(clickData):
+##    return json.dumps(clickData)
+##
+##
+##@app.callback(
+##    Output('selected-data', 'children'),
+##    [Input('basic-interactions', 'selectedData')])
+##def display_selected_data(selectedData):
+##    return json.dumps(selectedData)
+##
+##
+##@app.callback(
+##    Output('relayout-data', 'children'),
+##    [Input('basic-interactions', 'relayoutData')])
+##def display_relayout_data(relayoutData):
+##    return json.dumps(relayoutData)
+
+
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-server = app.server
-app.title=tabtitle
 
-########### Set up the layout
-app.layout = html.Div(children=[
-    html.H1(myheading),
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+
+server = app.server
+
+
+app.layout = html.Div([
     dcc.Graph(
-        id='flyingdog',
-        figure=beer_fig
+        id='basic-interactions',
+        figure=fig
     ),
-    html.A('Code on Github', href=githublink),
-    html.Br(),
-    html.A('Data Source', href=sourceurl),
-    ]
-)
+
+    html.Div(className='row', children=[
+        html.Div([
+            dcc.Markdown("""
+                **Hover Data**
+
+                Mouse over values in the graph.
+            """),
+            html.Pre(id='hover-data', style=styles['pre'])
+        ], className='three columns')
+    ])
+])
+
+
 
 if __name__ == '__main__':
     app.run_server()
+
+
+
+
+
+
+
+
+
